@@ -5,7 +5,7 @@ import 'package:freezed_auth/constant/shared_prefs.dart';
 import 'package:freezed_auth/constant/url_config.dart';
 
 abstract class ProductInterface {
-  Future<Response<dynamic>> getProduct();
+  Future<Response<dynamic>> getProduct(String? category);
 }
 
 class ProductRepository extends ProductInterface {
@@ -14,12 +14,12 @@ class ProductRepository extends ProductInterface {
   ProductRepository(this._dio);
 
   @override
-  Future<Response<dynamic>> getProduct() async {
+  Future<Response<dynamic>> getProduct(String? category) async {
     var token = await SharedPrefs().getString("token");
     try {
       return await _dio.get('${URLConfig.baseURL}/product',
+          queryParameters: {"category": category},
           options: OptionsDio.getOptions(token ?? ""));
-
     } catch (e) {
       DebugDev.log(e);
       rethrow;

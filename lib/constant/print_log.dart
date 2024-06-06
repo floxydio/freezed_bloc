@@ -8,6 +8,7 @@ class DebugDev {
   }
 }
 
+// ignore: camel_case_types
 class console {
   static void log(Object message) {
     if (kDebugMode) {

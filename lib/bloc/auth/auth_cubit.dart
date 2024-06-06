@@ -18,7 +18,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void signIn() async {
-
     emit(state.copyWith(isSuccess: 'loading'));
     final data = await authRepository.signIn(state.email, state.password);
     if (data.statusCode == 200 || data.statusCode == 201) {

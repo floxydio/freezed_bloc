@@ -30,6 +30,7 @@ class ProductModel {
 class ProductData {
   int? productId;
   String? nama;
+  String? category;
   String? quantity;
   int? price;
   String? productImage;
@@ -39,6 +40,7 @@ class ProductData {
   ProductData(
       {this.productId,
         this.nama,
+        this.category,
         this.quantity,
         this.price,
         this.productImage,
@@ -48,6 +50,7 @@ class ProductData {
   ProductData.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
     nama = json['nama'];
+    category = json['category'];
     quantity = json['quantity'];
     price = json['price'];
     productImage = json['product_image'];
@@ -59,6 +62,7 @@ class ProductData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['product_id'] = productId;
     data['nama'] = nama;
+    data['category'] = category;
     data['quantity'] = quantity;
     data['price'] = price;
     data['product_image'] = productImage;

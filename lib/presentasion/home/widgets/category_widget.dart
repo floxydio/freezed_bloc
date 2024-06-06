@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_auth/bloc/products/product_cubit.dart';
 import 'package:freezed_auth/constant/font_size.dart';
 
 class CategoryWidget extends StatefulWidget {
@@ -24,6 +26,13 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             onTap: () {
               setState(() {
                 indexCurrent = index;
+                if (index == 2) {
+                  context.read<ProductCubit>().getProduct(category: "t-shirt");
+                } else if (index == 0) {
+                  context.read<ProductCubit>().getProduct(category: "");
+                } else if (index == 3) {
+                  context.read<ProductCubit>().getProduct(category: "laptop");
+                }
               });
             },
             child: Container(
@@ -43,9 +52,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                   widget.data[index],
                   style: FontPoppins.font14.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: indexCurrent == index
-                        ? Colors.white
-                        : Colors.black,
+                    color: indexCurrent == index ? Colors.white : Colors.black,
                   ),
                 ),
               ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_auth/bloc/wishlist/add_wishlist_cubit.dart';
+import 'package:freezed_auth/bloc/wishlist/add_wishlist_state.dart';
 import 'package:freezed_auth/constant/font_size.dart';
 import 'package:freezed_auth/constant/rupiah_converter.dart';
 import 'package:freezed_auth/constant/url_config.dart';
@@ -63,8 +66,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
-                      RupiahConverter.convert(
-                          widget.data[index].price ?? 0),
+                      RupiahConverter.convert(widget.data[index].price ?? 0),
                       style: FontPoppins.font16.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -75,16 +77,22 @@ class _ProductWidgetState extends State<ProductWidget> {
                     height: 32,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets
-                            .zero, // Remove default padding
+                        padding: EdgeInsets.zero, // Remove default padding
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        alignment: Alignment
-                            .center, // Center align the content
+                        alignment: Alignment.center, // Center align the content
                       ),
-                      onPressed: () {},
-                      child: Text("+"),
+                      onPressed: () {
+                        var addWishCubit = context.read<AddWishlistCubit>();
+                        addWishCubit.addWishlist(AddWishlistState(
+                          productId: widget.data[index].productId ?? 0,
+                          productName: widget.data[index].nama ?? "",
+                          productPrice: widget.data[index].price.toString(),
+                          productImage: widget.data[index].productImage ?? "",
+                        ));
+                      },
+                      child: const Text("+"),
                     ),
                   )
                 ],

@@ -7,6 +7,7 @@ import 'package:freezed_auth/bloc/auth/auth_cubit.dart';
 import 'package:freezed_auth/bloc/category/category_cubit.dart';
 import 'package:freezed_auth/bloc/products/product_cubit.dart';
 import 'package:freezed_auth/bloc/slider/slider_cubit.dart';
+import 'package:freezed_auth/bloc/wishlist/add_wishlist_cubit.dart';
 import 'package:freezed_auth/constant/shared_prefs.dart';
 import 'package:freezed_auth/presentasion/home/screens/home.dart';
 import 'package:freezed_auth/repository/auth_repository.dart';
@@ -23,10 +24,14 @@ void main() {
           create: (context) => AuthCubit(authRepository: AuthRepository(Dio())),
         ),
         BlocProvider(
-          create: (context) => SliderCubit(sliderRepository: SliderRepository(Dio())),
+          create: (context) =>
+              SliderCubit(sliderRepository: SliderRepository(Dio())),
         ),
         BlocProvider(create: (context) => CategoryCubit()),
-        BlocProvider(create: (context) => ProductCubit(productRepository: ProductRepository(Dio()))),
+        BlocProvider(
+            create: (context) =>
+                ProductCubit(productRepository: ProductRepository(Dio()))),
+        BlocProvider(create: (context) => AddWishlistCubit())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -46,22 +51,21 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void navigateToNextScreen() async {
     String? checkLogin = await SharedPrefs().getString("token");
-    if(checkLogin == null) {
-      Timer(const Duration(seconds: 2), () {
+    if (checkLogin == null) {
+      Timer(const Duration(seconds: 1), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const SignIn()),
         );
       });
     } else {
-      Timer(const Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 1), () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       });
     }
-
   }
 
   @override
