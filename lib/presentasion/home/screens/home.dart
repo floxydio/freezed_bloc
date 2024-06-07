@@ -23,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final searchController = TextEditingController();
   int? indexCurrent = 0;
   @override
   void initState() {
@@ -30,6 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<SliderCubit>().getSlider();
     context.read<CategoryCubit>().getCategories();
     context.read<ProductCubit>().getProduct();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
   }
 
   @override
@@ -58,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 259,
                           height: 50,
                           child: TextFormField(
+                            onChanged: (value) {
+                              context
+                                  .read<ProductCubit>()
+                                  .getProduct(nama: value);
+                            },
+                            style: const TextStyle(color: Colors.white),
                             decoration: InputDecoration(
                                 hintText: "Search product...",
                                 hintStyle: FontPoppins.font14

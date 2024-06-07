@@ -9,10 +9,10 @@ class ProductCubit extends Cubit<ProductState> {
   ProductCubit({required this.productRepository})
       : super(const ProductState.initial());
 
-  void getProduct({String? category}) async {
+  void getProduct({String? category, String? nama}) async {
     emit(const ProductState.loading());
     try {
-      final data = await productRepository.getProduct(category);
+      final data = await productRepository.getProduct(category, nama);
       if (data.statusCode == 200) {
         List<dynamic> rawData = data.data["data"];
         List<ProductData> productList =
