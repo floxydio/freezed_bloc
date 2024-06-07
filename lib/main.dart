@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_auth/bloc/auth/auth_cubit.dart';
 import 'package:freezed_auth/bloc/category/category_cubit.dart';
+import 'package:freezed_auth/bloc/product_detail/product_detail_cubit.dart';
 import 'package:freezed_auth/bloc/products/product_cubit.dart';
 import 'package:freezed_auth/bloc/slider/slider_cubit.dart';
 import 'package:freezed_auth/bloc/wishlist/add_wishlist_cubit.dart';
@@ -31,7 +32,9 @@ void main() {
         BlocProvider(
             create: (context) =>
                 ProductCubit(productRepository: ProductRepository(Dio()))),
-        BlocProvider(create: (context) => AddWishlistCubit())
+        BlocProvider(create: (context) => AddWishlistCubit()),
+        BlocProvider(
+            create: (context) => ProductDetailCubit(ProductRepository(Dio())))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
