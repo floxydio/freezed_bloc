@@ -10,6 +10,7 @@ import 'package:freezed_auth/bloc/wishlist/add_wishlist_cubit.dart';
 import 'package:freezed_auth/bloc/wishlist/add_wishlist_state.dart';
 import 'package:freezed_auth/constant/font_size.dart';
 import 'package:freezed_auth/constant/rupiah_converter.dart';
+import 'package:freezed_auth/constant/shared_prefs.dart';
 import 'package:freezed_auth/constant/url_config.dart';
 import 'package:freezed_auth/presentasion/home/widgets/category_widget.dart';
 import 'package:freezed_auth/presentasion/home/widgets/product_widget.dart';
@@ -97,44 +98,45 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         InkWell(
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Wishlist'),
-                                    content: BlocBuilder<AddWishlistCubit,
-                                        WishListItem>(
-                                      builder: (context, wishState) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: wishState.wishList
-                                              .map((e) => ListTile(
-                                                    contentPadding:
-                                                        EdgeInsets.zero,
-                                                    title: Text(e.productName),
-                                                    subtitle: Text(
-                                                        RupiahConverter.convert(
-                                                            int.parse(e
-                                                                .productPrice))),
-                                                    leading: Image.network(
-                                                      "${URLConfig.baseURL}/storage/product/${e.productImage}",
-                                                      width: 50,
-                                                      height: 50,
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                        );
-                                      },
-                                    ),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('Close'))
-                                    ],
-                                  );
-                                });
+                            SharedPrefs().removeAllKey();
+                            // showDialog(
+                            //    context: context,
+                            //     builder: (context) {
+                            //       return AlertDialog(
+                            //         title: const Text('Wishlist'),
+                            //         content: BlocBuilder<AddWishlistCubit,
+                            //             WishListItem>(
+                            //           builder: (context, wishState) {
+                            //             return Column(
+                            //               mainAxisSize: MainAxisSize.min,
+                            //               children: wishState.wishList
+                            //                   .map((e) => ListTile(
+                            //                         contentPadding:
+                            //                             EdgeInsets.zero,
+                            //                         title: Text(e.productName),
+                            //                         subtitle: Text(
+                            //                             RupiahConverter.convert(
+                            //                                 int.parse(e
+                            //                                     .productPrice))),
+                            //                         leading: Image.network(
+                            //                           "${URLConfig.baseURL}/storage/product/${e.productImage}",
+                            //                           width: 50,
+                            //                           height: 50,
+                            //                         ),
+                            //                       ))
+                            //                   .toList(),
+                            //             );
+                            //           },
+                            //         ),
+                            //         actions: [
+                            //           TextButton(
+                            //               onPressed: () {
+                            //                 Navigator.pop(context);
+                            //               },
+                            //               child: const Text('Close'))
+                            //         ],
+                            //       );
+                            //     });
                           },
                           child: BlocBuilder<AddWishlistCubit, WishListItem>(
                               builder: (context, wishState) {

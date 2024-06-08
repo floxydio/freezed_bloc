@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_auth/bloc/product_detail/product_detail_state.dart';
-import 'package:freezed_auth/constant/print_log.dart';
 import 'package:freezed_auth/models/product_models.dart';
 import 'package:freezed_auth/repository/product_repository.dart';
 

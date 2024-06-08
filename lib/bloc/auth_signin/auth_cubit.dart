@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_auth/bloc/auth/auth_state.dart';
+import 'package:freezed_auth/bloc/auth_signin/auth_state.dart';
 import 'package:freezed_auth/constant/shared_prefs.dart';
 import 'package:freezed_auth/repository/auth_repository.dart';
 
